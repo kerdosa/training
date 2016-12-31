@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+coverage
+.DS_Store
+.idea
+*.log
+*.iml
+
+.bower-*/
+public/bower_components
+.env

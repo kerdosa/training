@@ -6,25 +6,22 @@
 'use strict';
 
 const gulp = require('gulp');
-const mocha = require('gulp-mocha');
-
 const $ = require('gulp-load-plugins')({lazy: true});
 
 gulp.task('test', function () {
-  return gulp.src(['test/*.js'])
+  return gulp.src(['test/*.js'], { read: false })
       .pipe($.mocha({
-        timeout: 60000
-      }))
-      .pipe($.istanbul.writeReports());
-      // .pipe($.exit());
+          reporter: 'spec',
+          timeout: 60000
+      }));
+
 });
 
-gulp.task('lint-backend', function() {
+gulp.task('lint', function() {
   return gulp.src(['src/**/*.js', 'data/*.js'])
     .pipe($.jshint())
     .pipe($.jshint.reporter('default', {verbose: true}))
     .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('lint', ['lint-backend']);
-gulp.task('default', ['lint-backend']);
+gulp.task('default', ['lint']);

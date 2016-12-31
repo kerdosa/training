@@ -11,6 +11,7 @@ process.env.NODE_ENV = 'test';
  * Import required modules and functions
  */
 const config = require('config');
+const mongoose = require('mongoose');
 const supertest = require('supertest');
 const expect = require('chai').expect;
 const assert = require('chai').assert;
@@ -33,6 +34,11 @@ describe("User API", function () {
     // delete all users before test
     before(function(done) {
         User.remove({}, done);
+    });
+
+    after(function(done) {
+        // close mongoose connection
+        mongoose.disconnect(done);
     });
 
     let createdUser;

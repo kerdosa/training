@@ -58,6 +58,7 @@ exports.notAllowedHandler = function(req, res, next) {
 exports.errorHandler = function(err, req, res, next) {
 
   if (err) {
+    console.log('err:', err);
     if (err.name === 'MongoError' && !err.httpStatus) {
       err.httpStatus = 400;
     }

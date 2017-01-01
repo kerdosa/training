@@ -22,7 +22,7 @@ const User = require('./models').User;
 const app = express();
 app.set('port', config.SERVER_PORT);
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());

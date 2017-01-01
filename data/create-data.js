@@ -9,7 +9,7 @@
 process.env.NODE_CONFIG_DIR = __dirname + '/../config';
 
 const co = require('co');
-const users = require('./users');
+const users = require('./users-data');
 const User = require('../src/models').User;
 
 const twoUsers = [{

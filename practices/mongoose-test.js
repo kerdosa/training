@@ -2,26 +2,38 @@
  * Created by hj on 12/29/16.
  */
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+const co = require('co');
 
 mongoose.connect('mongodb://localhost/myproject');
 
-const blogSchema = new Schema({
-    author    : ObjectId,
-    title     : String,
-    body      : String,
-    date      : Date
+// define schema
+const userSchema = new Schema({
+    name: String,
+    address: String,
+    age: Number
 });
 
-mongoose.model('Blog', blogSchema);
+// define model
+mongoose.model('User', userSchema);
 
-var Blog = mongoose.model('Blog');
+// get the model
+const User = mongoose.model('User');
 
-var blog = new Blog();
-blog.title = 'title';
-blog.body = 'body';
-blog.save(function (err, result) {
-    console.log(err, result);
+// example with callback
+// let user = new User();
+// user.name = 'New User';
+// user.address = '1 Infinie loop';
+// user.age = 25;
+// user.save(function (err, result) {
+//     console.log(err, result);
+// });
 
+// example with co/generator
+co(function*() {
+    let users = yield User.find();
+    console.log('users:', users);
+}).catch((err) => {
+    console.log('Failed:', err);
 });

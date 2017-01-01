@@ -2,43 +2,14 @@
  * Created by hj on 12/29/16.
  */
 
-const MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
-const users = require('./../data/users');
+const co = require('co');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+const ObjectId = require('mongodb').ObjectId;
 
+const userData = require('./../data/users-data');
+const mongoApi = require('./mongo-api');
 
-const insertDocuments = function(db, callback) {
-    // Get the documents collection
-    var collection = db.collection('documents');
-    // Insert some documents
-    collection.insertMany(users.getUsers(10), function(err, result) {
-        assert.equal(err, null);
-        // assert.equal(3, result.result.n);
-        // assert.equal(3, result.ops.length);
-        console.log("Inserted 3 documents into the document collection");
-        callback(null, result);
-    });
-};
-
-const insertDocument = function(db, callback) {
-    // Get the documents collection
-    var collection = db.collection('documents');
-
-    // Insert one document
-    const doc = {
-        title: 'My favorite book',
-        isbn: '',
-        price: 25
-    };
-    collection.insertOne(doc, function(err, result) {
-        assert.equal(err, null);
-        // assert.equal(3, result.result.n);
-        // assert.equal(3, result.ops.length);
-        // console.log('insertOne result:', result.result);
-        console.log("Inserted one document into the document collection");
-        callback(null, result);
-    });
-};
 
 // Connection URL
 const url = 'mongodb://localhost:27017/myproject';
@@ -47,13 +18,31 @@ MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server");
 
-    insertDocuments(db, function(err, result) {
-        if (err) {
-            console.log('err:', err);
-        } else {
-            console.log('success:', result.result);
-        }
+    // mongoApi.insertUsers(db, userData.getUsers(10), function(err, result) {
+    //     if (err) {
+    //         console.log('err:', err);
+    //     } else {
+    //         console.log('success:', result.result);
+    //     }
+    // });
 
+    // udpate user test
+    const collection = db.collection('users');
+    let modifiedUser = {
+        name: 'new name3',
+        age: 10
+    };
+    // collection.updateOne({_id: ObjectId('5867dfe320e44d43edb45b14')}, {$set: modifiedUser}, function(err, result) {
+    //     console.log('update err:', err);
+    // });
+
+    // mongoApi.updateUser(db, '5867dfe320e44d43edb45b14', modifiedUser, (err, result) => {
+    //     console.log('update err:', err);
+    // });
+
+    co(function*() {
+        let result = yield mongoApi.updateUser(db, '5867dfe320e44d43edb45b14', modifiedUser);
+        console.log('update result:', result.result);
     });
 
     db.close();

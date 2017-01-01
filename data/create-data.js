@@ -10,7 +10,7 @@ process.env.NODE_CONFIG_DIR = __dirname + '/../config';
 
 const co = require('co');
 const users = require('./users-data');
-const User = require('../backend/models').User;
+const User = require('../models').User;
 
 const twoUsers = [{
   email: 'admin@gmail.com',

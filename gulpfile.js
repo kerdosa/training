@@ -8,6 +8,15 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({lazy: true});
 
+const srcs = [
+    'app.js', 'routes.js',
+    'config/**/*.js',
+    'controllers/**/*.js',
+    'helpers/**/*.js',
+    'models/**/*.js',
+    'data/**/*.js'
+];
+
 gulp.task('test', function () {
   return gulp.src(['test/*.js'], { read: false })
       .pipe($.mocha({
@@ -18,7 +27,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(['backend/**/*.js', 'data/*.js'])
+  return gulp.src(srcs)
     .pipe($.jshint())
     .pipe($.jshint.reporter('default', {verbose: true}))
     .pipe($.jshint.reporter('fail'));

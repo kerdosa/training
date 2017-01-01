@@ -1,6 +1,9 @@
-Sample Project
+Sample Project with Express and Mongoose
 ===
 
+## References
+
+* [NodeJs hackathon starter](https://github.com/sahat/hackathon-starter)
 
 
 ## Setup
@@ -42,9 +45,10 @@ Before deploy please check configuration is set correctly in the `config/default
 
 Please make sure the MongoDB server is running locally.
 
-Install gulp.
+Install gulp & mocha.
 
 	$ npm install -g gulp
+	$ npm install -g mocha
 
 Unzip the submission and cd to the unzipped folder.
 

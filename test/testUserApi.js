@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const supertest = require('supertest');
 const expect = require('chai').expect;
 const assert = require('chai').assert;
-const User = require('../src/models').User;
+const User = require('../backend/models').User;
 
 const BASE_URL = 'http://localhost:3000';
 const req = supertest(BASE_URL);

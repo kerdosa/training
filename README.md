@@ -76,6 +76,11 @@ Start the application.
 		
 By default the application runs in port 3000. Visit http://localhost:3000
 
+Run the test.
+	
+	$ gulp test
+	
+
 ## Debug Message
 
 To see the verbose debug message, export DEBUG=backend:api

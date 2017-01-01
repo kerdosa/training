@@ -18,7 +18,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(['src/**/*.js', 'data/*.js'])
+  return gulp.src(['backend/**/*.js', 'data/*.js'])
     .pipe($.jshint())
     .pipe($.jshint.reporter('default', {verbose: true}))
     .pipe($.jshint.reporter('fail'));
